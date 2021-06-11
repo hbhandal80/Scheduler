@@ -1,5 +1,3 @@
-import DayList from "components/DayList";
-
 export function getAppointmentsForDay(state, day) {
   const newDays = state.days.filter((element) => {
     return element.name === day;
@@ -12,3 +10,11 @@ export function getAppointmentsForDay(state, day) {
   }
   return apts;
 }
+
+export function getInterview(state, interview) {
+
+};
+
+export function getInterviewersForDay(state, day) {
+ 
+};

@@ -24,8 +24,17 @@ export function getInterview(state, interview) {
     }
   }
   return interviewObj;
-
 }
 
 export function getInterviewersForDay(state, day) {
+  const newDays = state.days.filter((element) => {
+    return element.name === day;
+  });
+  let intForDay = [];
+  if (newDays.length > 0) {
+    intForDay = newDays[0].interviewers.map((id) => {
+      return state.interviewers[id];
+    });
+  }
+  return intForDay;
 };

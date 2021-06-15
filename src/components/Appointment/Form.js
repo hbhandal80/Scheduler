@@ -28,19 +28,19 @@ export default function Form(props) {
             placeholder="Enter Student Name"
             value={name}
             onChange={(event) => {setName(event.target.value)}}
-            // data-testid="student-name-input"
           />
         </form>
         <InterviewerList
           interviewers={props.interviewers}
-          value={interviewer}
-          onChange={setInterviewer}
+          interviewer={interviewer}
+          setInterviewer={setInterviewer}
         />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={props.onSave}>Save</Button>
+          <Button confirm onClick={() => {props.onSave(name, interviewer)}}>Save</Button>
+          
         </section>
       </section>
     </main>

@@ -1,13 +1,14 @@
 import React from 'react'
 
 import "components/Appointment/styles.scss";
+import useVisualMode from 'hooks/useVisualMode'
 
 import Header from 'components/Appointment/Header'
 import Empty from 'components/Appointment/Empty'
 import Show from 'components/Appointment/Show'
 import Confirm from 'components/Appointment/Confirm'
-import useVisualMode from 'hooks/useVisualMode'
 import Form from './Form';
+import Status from './Status';
 
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
@@ -16,7 +17,7 @@ export default function Appointment(props) {
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
-  const EDIT = "EDIT";
+  const EDIT = "EDIT"
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -33,11 +34,11 @@ export default function Appointment(props) {
     transition(SHOW);
   }
 
-  function deleteAppointment(){
+  function deleteAppointment() {
     transition(CONFIRM);
   }
-    
-  function confirmDeleteAppointment(){
+
+  function confirmDeleteAppointment() {
     transition(DELETING)
     props.cancelInterview(props.id);
     transition(EMPTY);
@@ -46,7 +47,6 @@ export default function Appointment(props) {
   function edit() {
     transition(EDIT);
   }
-
 
   return (
     <article className="appointment">
@@ -60,13 +60,15 @@ export default function Appointment(props) {
           bookInterview={props.bookInterview}
           onCancel={() => back()}
           onSave={save}
-          
+          onDelete={deleteAppointment}
         />
-        }
+      }
       {mode === CONFIRM &&
         <Confirm
+          message={"Are you sure you would like to delete?"}
           onConfirm={confirmDeleteAppointment}
-          />
+          onCancel={() => back()}
+        />
       }
       {mode === SHOW && (
         <Show
@@ -76,6 +78,24 @@ export default function Appointment(props) {
           onEdit={edit}
         />
       )}
+      {mode === SAVING && (
+        <Status
+          message={"Saving"}
+        />
+      )}
+      {mode === DELETING && (
+        <Status
+          message={"Deleting"}
+        />
+      )}
+      {mode === EDIT &&
+        <Form
+          interviewers={props.interviewers}
+          bookInterview={props.bookInterview}
+          onCancel={() => back()}
+          onSave={save}
+        />
+      }
     </article>
   );
 }

@@ -19,8 +19,7 @@ export default function Application(props) {
 
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    const interviewers = getInterviewersForDay(state, state.day);
-  
+    const interviewers = getInterviewersForDay(state, state.day); 
     return (
       <Appointment
         key={appointment.id}
@@ -28,6 +27,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
@@ -46,6 +47,30 @@ export default function Application(props) {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
     });
   }, []);
+
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({...state, appointments});
+  }
+
+  function cancelInterview(id){
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState(prev => ({...prev, appointments}));
+  }
 
   return (
     <main className="layout">

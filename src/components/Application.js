@@ -58,8 +58,8 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
     setState({...state, appointments});
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
   }
 
   function cancelInterview(id){
@@ -72,6 +72,7 @@ export default function Application(props) {
       [id]: appointment
     };
     setState(prev => ({...prev, appointments}));
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
   }
 
   return (

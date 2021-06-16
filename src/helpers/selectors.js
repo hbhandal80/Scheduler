@@ -12,7 +12,7 @@ export function getAppointmentsForDay(state, day) {
 }
 
 export function getInterview(state, interview) {
-  if (interview === null) {
+  if (!interview || !interview.interviewer) {
     return null;
   }
   const interviewObj = {

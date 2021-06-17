@@ -10,9 +10,9 @@ export default function useApplicationData() {
   })
 
   useEffect(() => {
-    const daysURL = "http://localhost:8001/api/days";
-    const appointmentsURL = "http://localhost:8001/api/appointments";
-    const interviewersURL = " http://localhost:8001/api/interviewers";
+    const daysURL = `/api/days`
+    const appointmentsURL = `/api/appointments`;
+    const interviewersURL = `/api/interviewers`;
 
     Promise.all([
       axios.get(daysURL),
@@ -53,9 +53,8 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-
-    setState({ ...state, appointments, days: getSpotsRemaining(state.days, appointments) });
     return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
+    .then(() => {setState({ ...state, appointments, days: getSpotsRemaining(state.days, appointments) });})
   }
 
   function cancelInterview(id) {
@@ -67,8 +66,8 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    setState(prev => ({ ...prev, appointments, days: getSpotsRemaining(state.days, appointments) }));
-    return axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+    .then(() => {setState(prev => ({ ...prev, appointments, days: getSpotsRemaining(state.days, appointments) }));})
   }
   return { setDay, bookInterview, cancelInterview, state }
 }

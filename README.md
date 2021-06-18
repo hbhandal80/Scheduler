@@ -14,6 +14,12 @@ The following is a list of all the things that can be done in the Interview Sche
 * Edit an existing appointment
 * Updated number of slot available for any given day
 
+!["Screenshot description"](https://github.com/hbhandal80/Scheduler/blob/master/docs/Main%20%20Page.png?raw=true)
+
+!["Screenshot description"](https://github.com/hbhandal80/Scheduler/blob/master/docs/Add%20Interview.png?raw=true)
+
+!["Screenshot description"](https://github.com/hbhandal80/Scheduler/blob/master/docs/Delete%20Confirm.png?raw=true)
+
 ## Setup
 
 Install dependencies with `npm install`.

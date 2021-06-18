@@ -19,8 +19,8 @@ export default function Form(props) {
   }
 
   const reset = () => {
-    setName("")
-    setInterviewer(null)
+    setName("");
+    setInterviewer(null);
   }
 
   const cancel = () => {
@@ -56,5 +56,5 @@ export default function Form(props) {
         </section>
       </section>
     </main>
-  )
+  );
 };

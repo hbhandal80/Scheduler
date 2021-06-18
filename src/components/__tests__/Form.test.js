@@ -36,15 +36,15 @@ describe("Form", () => {
 
 
   it("validates that the student name is not blank", () => {
-    /* 1. Create the mock onSave function */
+    // Create the mock onSave function
     const onSave = jest.fn();
 
-    /* 2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined */
+    // Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined
     const { getByText } = render(
       <Form interviewers={interviewers} onSave={onSave} />
     );
 
-    /* 3. Click the save button */
+    // Click the save button
     fireEvent.click(getByText("Save"));
 
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
@@ -56,20 +56,20 @@ describe("Form", () => {
     const { getByText, getByPlaceholderText, queryByText } = render(
       <Form interviewers={interviewers} onSave={onSave} />
     );
-  
+
     fireEvent.click(getByText("Save"));
-  
+
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
-  
+
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" }
     });
-  
+
     fireEvent.click(getByText("Save"));
-  
+
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
-  
+
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
   });
@@ -84,19 +84,19 @@ describe("Form", () => {
         onCancel={onCancel}
       />
     );
-  
+
     fireEvent.click(getByText("Save"));
-  
+
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" }
     });
-  
+
     fireEvent.click(getByText("Cancel"));
-  
+
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
-  
+
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
-  
+
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 });

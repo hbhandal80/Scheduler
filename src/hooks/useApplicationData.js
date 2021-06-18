@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -26,6 +26,7 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+  // Calculates the number of spots remaining
   function spotsRemaining(day, appointments) {
     const spots = day.appointments;
     let spotsAvailable = 0;
@@ -39,11 +40,12 @@ export default function useApplicationData() {
 
   function getSpotsRemaining(days, appointments) {
     const updatedSpots = days.map(day => ({
-      ...day,spots: spotsRemaining(day, appointments)
+      ...day, spots: spotsRemaining(day, appointments)
     }))
     return updatedSpots;
   }
 
+  // Book a new interview and add it to the database
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -54,9 +56,10 @@ export default function useApplicationData() {
       [id]: appointment
     };
     return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
-    .then(() => {setState({ ...state, appointments, days: getSpotsRemaining(state.days, appointments) });})
-  }
+      .then(() => { setState({ ...state, appointments, days: getSpotsRemaining(state.days, appointments) }); })
+  };
 
+  // Cancel an interview and delete it from the database
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -67,7 +70,8 @@ export default function useApplicationData() {
       [id]: appointment
     };
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
-    .then(() => {setState(prev => ({ ...prev, appointments, days: getSpotsRemaining(state.days, appointments) }));})
-  }
+      .then(() => { setState(prev => ({ ...prev, appointments, days: getSpotsRemaining(state.days, appointments) })); 
+    });
+  };
   return { setDay, bookInterview, cancelInterview, state }
-}
+};

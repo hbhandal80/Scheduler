@@ -19,6 +19,7 @@ import Status from 'components/Appointment/Status'
 import Error from 'components/Appointment/Error'
 import Form from 'components/Appointment/Form'
 
+// Button Setup
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -35,74 +36,79 @@ storiesOf("Button", module)
     </Button>
   ));
 
-storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
+//Initiates Storybook and registers our DayListItem component
+storiesOf("DayListItem", module) 
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  }) // Provides the default background color for our component
-  .add("Unselected", () => <DayListItem name="Monday" spots={5} />) // To define our stories, we call add() once for each of our test states to generate a story
-  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
+  }) 
+  // Provides the default background color for our component
+  .add("Unselected", () => <DayListItem name="Monday" spots={5} />) 
+  // To define our stories, we call add() once for each of our test states to generate a story
+  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />)
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
-    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
+    // action() allows us to create a callback that appears in the actions panel when clicked
+    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> 
   ));
 
-  const days = [
-    {
-      id: 1,
-      name: "Monday",
-      spots: 2,
-    },
-    {
-      id: 2,
-      name: "Tuesday",
-      spots: 5,
-    },
-    {
-      id: 3,
-      name: "Wednesday",
-      spots: 0,
-    },
-  ];
+const days = [
+  {
+    id: 1,
+    name: "Monday",
+    spots: 2,
+  },
+  {
+    id: 2,
+    name: "Tuesday",
+    spots: 5,
+  },
+  {
+    id: 3,
+    name: "Wednesday",
+    spots: 0,
+  },
+];
 
-  const appointments = [
-    {
-      id: 1,
-      time: "12pm",
-    },
-    {
-      id: 2,
-      time: "1pm",
-      interview: {
-        student: "Lydia Miller-Jones",
-        interviewer: {
-          id: 1,
-          name: "Sylvia Palmer",
-          avatar: "https://i.imgur.com/LpaY82x.png",
-        }
+const appointments = [
+  {
+    id: 1,
+    time: "12pm",
+  },
+  {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer: {
+        id: 1,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
       }
-    },
-    {
-      id: 3,
-      time: "2pm",
-    },
-    {
-      id: 4,
-      time: "4pm",
-      interview: {
-        student: "Steven Gerrard",
-        interviewer: {
-          id: 1,
-          name: "Mildred Nazir",
-          avatar: "https://i.imgur.com/T2WwVfS.png",
-        }
-      }
-    },
-    {
-      id: "last",
-      time: "5pm",
     }
-  ];
-  
+  },
+  {
+    id: 3,
+    time: "2pm",
+  },
+  {
+    id: 4,
+    time: "4pm",
+    interview: {
+      student: "Steven Gerrard",
+      interviewer: {
+        id: 1,
+        name: "Mildred Nazir",
+        avatar: "https://i.imgur.com/T2WwVfS.png",
+      }
+    }
+  },
+  {
+    id: "last",
+    time: "5pm",
+  }
+];
+
+//Initiates Storybook and registers our DayList component
 storiesOf("DayList", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
@@ -114,12 +120,13 @@ storiesOf("DayList", module)
     <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
   ));
 
-  const interviewer = {
-    id: 1,
-    name: "Sylvia Palmer",
-    avatar: "https://i.imgur.com/LpaY82x.png"
-  };  
+const interviewer = {
+  id: 1,
+  name: "Sylvia Palmer",
+  avatar: "https://i.imgur.com/LpaY82x.png"
+};
 
+//Initiates Storybook and registers our InterviewerListItem component
 storiesOf("InterviewerListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -148,14 +155,15 @@ storiesOf("InterviewerListItem", module)
     />
   ));
 
-  const interviewers = [
-    { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
-    { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
-    { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
-    { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
-    { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
-  ];
-  
+const interviewers = [
+  { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
+  { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
+  { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
+  { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
+  { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
+];
+
+//Initiates Storybook and registers our InterviewerList component
 storiesOf("InterviewerList", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -174,7 +182,8 @@ storiesOf("InterviewerList", module)
     />
   ));
 
-  storiesOf("Appointment", module)
+//Initiates Storybook and registers our Appointment component
+storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
@@ -183,22 +192,22 @@ storiesOf("InterviewerList", module)
   .add("Header", () => <Header time="12pm" />)
   .add("Empty", () => <Empty onAdd={action("onAdd")} />)
   .add("Show", () => (
-    <Show 
+    <Show
       student="Lydia Miller-Jones"
       interviewer={interviewer}
       onEdit={action("onEdit")}
-      onDelete={action("onDelete")} 
+      onDelete={action("onDelete")}
     />
   ))
   .add("Confirm", () => (
-    <Confirm 
+    <Confirm
       message="Delete the appointment?"
       onConfirm={action("onConfirm")}
-      onCancel={action("onCancel")} 
+      onCancel={action("onCancel")}
     />
   ))
   .add("Status", () => <Status message="Deleting" />)
-  .add("Error", () => ( 
+  .add("Error", () => (
     <Error
       message="Could not delete appointment"
       onClose={action("onClose")}
@@ -208,7 +217,7 @@ storiesOf("InterviewerList", module)
     <Form
       interviewers={interviewers}
       onSave={action("onSave")}
-      onCancel={action("onCancel")} 
+      onCancel={action("onCancel")}
     />
   ))
   .add("Form Edit", () => (
@@ -217,7 +226,7 @@ storiesOf("InterviewerList", module)
       interviewers={interviewers}
       interviewer={1}
       onSave={action("onSave")}
-      onCancel={action("onCancel")} 
+      onCancel={action("onCancel")}
     />
   ))
   .add("Appointment Empty", () => (

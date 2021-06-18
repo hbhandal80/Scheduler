@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 export default function useVisualMode(initial) {
 
   const [mode, setMode] = useState(initial);
@@ -12,18 +11,18 @@ export default function useVisualMode(initial) {
     } else {
       setMode(mode);
       setHistory([...history, mode]);
-    }
+    };
   };
-  
-  function back() { 
-    if(history.length === 1) {
-    setMode(initial);
-  } else {
-    const historyNew = [...history];
-    historyNew.pop();
-    setHistory(historyNew);
-    setMode(historyNew[historyNew.length - 1])
-  }
-  }
+
+  function back() {
+    if (history.length === 1) {
+      setMode(initial);
+    } else {
+      const historyNew = [...history];
+      historyNew.pop();
+      setHistory(historyNew);
+      setMode(historyNew[historyNew.length - 1]);
+    };
+  };
   return { mode, transition, back };
 };
